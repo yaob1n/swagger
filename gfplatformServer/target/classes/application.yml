@@ -1,0 +1,52 @@
+server:
+  port: 8190
+spring:
+  application:
+    name: gfplatformServer
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/, file:${file.dir}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.4.95:5432/gv_gf
+    username: postgres
+    password: postgres
+    druid:
+      filter:
+        wall:
+          enabled: true
+        slf4j:
+          enabled: true
+          result-set-log-enabled: false
+          connection-log-enabled: false
+          statement-parameter-clear-log-enable: false
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+        hibernate:
+            temp:
+                use_jdbc_metadata_defaults: false
+            dialect: org.hibernate.spatial.dialect.postgis.PostgisPG9Dialect
+  freemarker:
+    cache: true
+    request-context-attribute: request
+    expose-request-attributes: true
+    expose-session-attributes: true   
+    
+file:
+  dir: /mnt/mfs-cli/iglobe-data/data/gf/
+  #dir: E:\\Area\\anhui
+swagger:
+    enabled: true
+    title: 高分项目
+    version: 1.0.0
+    description: 高分项目接口查看
+    contact:
+        name: \u5DE9\u5FD7\u8FDC
+    exclude-path: /error,/actuator/**
+    authorization:
+      name: \u8BA4\u8BC1\u5934
+      key-name: Authorization
